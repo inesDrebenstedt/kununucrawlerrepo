@@ -17,7 +17,7 @@ if __name__ == '__main__':
     print_hi('Kununu Scraper')
 
 # 1. returns string "https://www.kununu.com/de/company-name/Kommentare"
-url =  makeGoogleSearch('dfv deutsche familienversicherung')
+url =  makeGoogleSearch('Positive thinking company GmbH')
 #print('URL result: ' + str(url))
 
 # 2. returns string of html body

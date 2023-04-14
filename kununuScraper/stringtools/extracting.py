@@ -11,7 +11,7 @@ def getRatings(htmlText):
         ratingStr = ratingLine.text
         rating = Decimal(ratingStr.replace(',','.'))
         ratingValues.append(rating)
-        print(rating)
+        #print(rating)
     return ratingValues
 
 def findSuspiciousKeyWords(htmlTextBodyAsString):
