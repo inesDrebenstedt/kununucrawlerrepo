@@ -1,45 +1,50 @@
 # import the mysql client for python
 
 import pymysql
+import mysql.connector
 
-def createAndConnectDB():
+def createAndConnectDB(DataBaseName):
 
     # Create a connection object
     # IP address of the MySQL database server
     Host = "localhost"
 
     # User name of the database server
-    User = "user"
+    User = "new_user"
 
     # Password for the database user
-    Password = ""
+    Password = "Password_2023"
 
-    conn = pymysql.connect(host=Host, user=User, password=Password)
+    conn = mysql.connector.connect(host=Host, user=User, password=Password)
 
     # Create a cursor object
     cur = conn.cursor()
 
     # creating database
-    cur.execute("CREATE DATABASE kununuratings")
+    cur.execute("CREATE DATABASE IF NOT EXISTS kununuratings")
 
     cur.execute("SHOW DATABASES")
     databaseList = cur.fetchall()
 
     for database in databaseList:
-        print(database)
+        print('DATABASE in SYSTEM: ', database)
+
+    createTable(conn, cur, 'kununuratings')
 
     conn.close()
 
-def createTable():
-    conn = pymysql.connect('localhost', 'user', 'password', 'kununuratings')
-    cur = conn.cursor()
+def createTable(conn, cur, databaseName):
+    #conn = pymysql.connect('localhost', 'user', 'password', 'kununuratings')
+    #cur = conn.cursor()
+    useDBCommand = 'USE ' + databaseName
+    cur.execute(useDBCommand)
     cur.execute("DROP TABLE IF EXISTS COWORKER_RATINGS")
     createCoworkerRatingsTableQuery = """
              CREATE TABLE COWORKER_RATINGS ( 
-             RATING_ID  CHAR(20) NOT NULL, 
+             RATING_ID  int(10) NOT NULL AUTO_INCREMENT PRIMARY_KEY, 
              COMPANY_NAME VARCHAR(64) NOT NULL,
-             xData  int(10), 
-             yData int(10) 
+             xData  DOUBLE NULL DEFAULT NULL, 
+             yData DOUBLE NULL DEFAULT NULL)
              """
 
     # To execute the SQL query
@@ -47,4 +52,4 @@ def createTable():
 
     # To commit the changes
     conn.commit()
-    conn.close()
+    #conn.close()
