@@ -17,20 +17,20 @@ def print_hi(name):
 if __name__ == '__main__':
     print_hi('Kununu Scraper')
 
-createAndConnectDB('kununuratings')
+# createAndConnectDB('kununuratings')
 
 # 1. returns string "https://www.kununu.com/de/company-name/Kommentare"
-#url =  makeGoogleSearch('Positive thinking company GmbH')
+url =  makeGoogleSearch('Ferchau')
 #print('URL result: ' + str(url))
 
-# 2. returns string of html body
-#htmlResultBody = str(makeUrlRequest(url))
-# append html string result from other pages ...kommentare/2 etc.
-#htmlResultBody = htmlResultBody + browsePageNumbers(url)
+# 2. returns string of html body:
+htmlResultBody = str(makeUrlRequest(url))
+# append html string result from other pages ...kommentare/2 etc.:
+htmlResultBody = htmlResultBody + browsePageNumbers(url)
 
-# 3. returns array of decimals
-#ratings = getRatings(htmlResultBody)
+# 3. returns ratings as array of decimals:
+ratings = getRatings(htmlResultBody)
 
-# 4. makes X,Y plot with data points
-#generateXYdata(ratings)
+# 4. makes X,Y plot with data points:
+generateXYdata(ratings)
 
